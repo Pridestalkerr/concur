@@ -1,9 +1,18 @@
+#pragma once
+
+#include <mutex>
+#include <condition_variable>
+#include <thread>
+#include "execution_context.hpp"
+
+
+
 namespace thr
 {
 
 
 
-template <typename Context_T>
+template <typename Context_T = thr::Dynamic_context>
 class Persistent_thread
 {
 	Context_T m_context;
@@ -18,7 +27,7 @@ class Persistent_thread
 
 public:
 
-	Persistent_thread(Context_T&&);
+	Persistent_thread(Context_T&& = thr::Dynamic_context());
 	~Persistent_thread();
 
 	template <typename... Args>
