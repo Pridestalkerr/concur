@@ -1,2 +1,2 @@
-# threadpool
-C++17 simple threadpool library.
+# thread
+A C++17 library providing asynchronous execution and persistent threading.
