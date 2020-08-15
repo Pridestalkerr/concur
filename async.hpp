@@ -32,10 +32,15 @@ public:
 
 	Async(size_t = std::thread::hardware_concurrency());
 
+	Async(Async&) = delete;
+	Async(const Async&) = delete;
+	Async(Async&&) = delete;
+	Async(const Async&&) = delete;
+
 	~Async();
 
 	template <typename F, typename... Args>
-	std::future <typename std::result_of <F(Args...)>::type>
+	std::future <typename std::invoke_result_t <F, Args...>>
 	operator()(F &&function, Args&&... args);
 
 private:
@@ -97,10 +102,10 @@ RUN:
 
 
 template <typename F, typename... Args>
-std::future <typename std::result_of <F(Args...)>::type>
+std::future <typename std::invoke_result_t <F, Args...>>
 Async::operator()(F &&function, Args&&... args)
 {
-	using result_type = typename std::result_of <F(Args...)>::type;
+	using result_type = typename std::invoke_result_t <F, Args...>;
 
 	auto context = std::make_shared <std::packaged_task <result_type()>>(
         std::bind(std::forward <F>(function), std::forward <Args>(args)...)
