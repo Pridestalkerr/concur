@@ -7,12 +7,12 @@
 
 
 
-namespace thr
+namespace con
 {
 
 
 
-template <typename Context_T = thr::Dynamic_context>
+template <typename Context_T = Dynamic_context>
 class Thread
 {
     Context_T m_context;
@@ -27,7 +27,7 @@ class Thread
 
 public:
 
-    Thread(Context_T&& = thr::Dynamic_context());
+    Thread(Context_T&& = Dynamic_context());
     ~Thread();
 
     template <typename... Args>

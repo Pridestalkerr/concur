@@ -5,7 +5,7 @@
 
 
 
-namespace thr
+namespace con
 {
 
 
@@ -27,6 +27,7 @@ class Static_context
 
 public:
 
+    Static_context(F&);
     Static_context(F&&);
 
     template <typename... Args_>
@@ -36,11 +37,16 @@ public:
 
 };
 
+template <typename R, typename... Args>
+Static_context <R, Args...>::Static_context(F& function)
+    :
+    m_function(function)
+{};
 
 template <typename R, typename... Args>
 Static_context <R, Args...>::Static_context(F&& function)
     :
-    m_function(std::forward <F> (function))
+    m_function(std::move(function))
 {};
 
 

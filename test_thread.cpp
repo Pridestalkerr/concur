@@ -1,5 +1,5 @@
 #include <iostream>
-#include "./include/thread.hpp"
+#include "./include/concur.hpp"
 
 int main()
 {
@@ -8,11 +8,11 @@ int main()
         return x * y;
     };
 
-    thr::Thread t{ thr::Static_context(f) };
+    con::Thread t{ con::Static_context(f) };
     auto ret = t.run(2, 2);
     std::cout << ret.get() << std::endl;
 
-    thr::Thread t0{};
+    con::Thread t0{};
     ret = t0.run(f, 2, 2);
     std::cout << ret.get() << std::endl;
     ret = t0.run([](int x) -> int {

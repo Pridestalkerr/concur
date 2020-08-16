@@ -1,5 +1,5 @@
 #include <iostream>
-#include "./include/async.hpp"
+#include "./include/concur.hpp"
 
 int main()
 {
@@ -9,7 +9,7 @@ int main()
         return x * y;
     };
 
-    thr::Async async;    // make sure this doesnt go out of scope!
+    con::Async async;    // make sure this doesnt go out of scope!
     
     std::cout <<
 
