@@ -15,9 +15,9 @@ namespace thr
 template <typename Context_T = thr::Dynamic_context>
 class Thread
 {
-	Context_T m_context;
+    Context_T m_context;
 
-	std::condition_variable m_cv;
+    std::condition_variable m_cv;
     std::mutex m_mtx;
 
     enum Status {STANDBY, RUNNING, EXIT} m_status;
@@ -27,10 +27,10 @@ class Thread
 
 public:
 
-	Thread(Context_T&& = thr::Dynamic_context());
-	~Thread();
+    Thread(Context_T&& = thr::Dynamic_context());
+    ~Thread();
 
-	template <typename... Args>
+    template <typename... Args>
     auto run(Args&&...);
 
 };
@@ -38,17 +38,17 @@ public:
 
 template <typename Context_T>
 Thread <Context_T>::Thread(Context_T &&context)
-	:
-	m_context(std::forward <Context_T>(context)),
-	m_status(STANDBY),
-	m_worker(&Thread <Context_T>::thread_loop, this)
+    :
+    m_context(std::forward <Context_T>(context)),
+    m_status(STANDBY),
+    m_worker(&Thread <Context_T>::thread_loop, this)
 {};
 
 
 template <typename Context_T>
 Thread <Context_T>::~Thread()
 {
-	{
+    {
         std::unique_lock<std::mutex> lock(m_mtx);
         m_status = EXIT;
     }
