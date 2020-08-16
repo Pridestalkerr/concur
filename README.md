@@ -1,10 +1,20 @@
 # thread
 A C++17 library providing asynchronous execution and persistent threading.
 
-## USAGE
+## Installation (optional)
+```bash
+$ make install
+```
+
+## Usage
+Include the header.
+```cpp
+#include <concur>                // if you've installed the library
+#include "./include/concur.hpp"  // if you haven't
+```
 Initiate an async instance.
 ```cpp
-thr::Async async;
+con::Async async;
 ```
 Run async functions, wait for their result whenever.
 ```cpp
